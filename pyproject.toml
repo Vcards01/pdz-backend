@@ -1,0 +1,72 @@
+[tool.poetry]
+name = "pdz-backend"
+version = "0.1.0"
+description = ""
+authors = ["Victor Cardoso <vhcardoso30@gmail.com>"]
+readme = "README.md"
+packages = [{include = "pdz_backend"}]
+
+[tool.poetry.dependencies]
+python = "^3.8.1"
+fastapi = "^0.109.2"
+uvicorn = "^0.27.0.post1"
+python-multipart = "^0.0.7"
+python-jose = "^3.3.0"
+passlib = "^1.7.4"
+sqlalchemy = "^2.0.25"
+python-dotenv = "^1.0.1"
+flake8 = "^7.0.0"
+mypy = "^1.8.0"
+black = "^24.1.1"
+asyncio = "^3.4.3"
+aiosqlite = "^0.19.0"
+flake8-pyproject = "^1.2.3"
+yt-dlp = "^2024.5.27"
+pyjwt = "^2.8.0"
+
+[tool.mypy]
+python_version = "3.8"
+show_error_codes = true
+namespace_packages = true
+explicit_package_bases = true
+disable_error_code = ["no-redef"]
+follow_imports = "silent"
+ignore_missing_imports = true
+warn_unused_ignores = true
+enable_error_code = [
+    "ignore-without-code"
+]
+files = [
+    "tests",
+    "app.py",
+    "src"
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+pythonpath = "." 
+testpaths = [
+    "tests"
+]
+addopts = [
+    "--junitxml=./test-results/unit_tests.xml",
+    "--cov=src",
+    "--cov-branch"
+]
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = "E203"
+filename = [
+    "src/*",
+    "tests/*",
+    "app.py"
+]
+max-complexity = 15
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
