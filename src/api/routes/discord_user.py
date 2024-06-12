@@ -36,7 +36,11 @@ async def create_new_user(
         await service.get_user_by_username(
             username=form_data.username,
         )
-    except Exception as e:
-        raise e
+    except service.UserNotFound:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Usuario não autorizado",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
 
     return {"accepted":True,"message": "Usuario autorizado"}
